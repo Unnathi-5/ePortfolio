@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unnathi Annapurna Shashikumar | Biomedical Engineer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#121212',
+                        'dark-card': '#1E1E1E',
+                        'earth-gold': '#B8860B',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #E5E5E5;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism effect */
+        .glass-card {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Sticky navigation */
+        .sticky-nav {
+            backdrop-filter: blur(10px);
+            background: rgba(18, 18, 18, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Button hover effects */
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(94, 234, 212, 0.3);
+        }
+        
+        .btn-secondary {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Project card hover */
+        .project-card {
+            transition: all 0.4s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(94, 234, 212, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Pill tag */
+        .pill-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .pill-tag:hover {
+            background-color: rgba(94, 234, 212, 0.2);
+            border-color: rgba(94, 234, 212, 0.5);
+            transform: scale(1.05);
+        }
+        
+        /* Navigation link hover */
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #5EEAD4, #B8860B);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Section spacing */
+        section {
+            padding: 6rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+        }
+        
+        /* Headshot container with glow */
+        .headshot-container {
+            border-radius: 24px;
+            border: 2px solid rgba(20, 184, 166, 0.3);
+            box-shadow: 0 0 30px rgba(20, 184, 166, 0.2);
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav fixed top-0 w-full z-50 px-6 md:px-12 lg:px-24 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl font-semibold text-teal-400">
+                UAS
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-sm text-gray-300 hover:text-teal-400">About</a>
+                <a href="#work" class="nav-link text-sm text-gray-300 hover:text-teal-400">Work</a>
+                <a href="#skills" class="nav-link text-sm text-gray-300 hover:text-teal-400">Skills</a>
+                <a href="#contact" class="nav-link text-sm text-gray-300 hover:text-teal-400">Contact</a>
+            </div>
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-teal-400">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 space-y-3">
+            <a href="#about" class="block text-sm text-gray-300 hover:text-teal-400">About</a>
+            <a href="#work" class="block text-sm text-gray-300 hover:text-teal-400">Work</a>
+            <a href="#skills" class="block text-sm text-gray-300 hover:text-teal-400">Skills</a>
+            <a href="#contact" class="block text-sm text-gray-300 hover:text-teal-400">Contact</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-6 md:px-12 lg:px-24 pt-20">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <!-- Headshot -->
+                <div class="flex-shrink-0" id="hero-headshot">
+                    <div class="headshot-container w-48 h-48 md:w-64 md:h-64">
+                        <img src="UAS_PP.jpeg" 
+                             alt="Unnathi Annapurna Shashikumar" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+                
+                <!-- Hero Content -->
+                <div class="flex-1 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" id="hero-headline">
+                        Biomedical Engineer: Innovating at the Intersection of <span class="text-teal-400">Wearables, Robotics & Sustainable Health</span>.
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-gray-400 mb-8" id="hero-subheadline">
+                        Unnathi Annapurna Shashikumar | Biomedical Engineer | MSE, Johns Hopkins University
+                    </p>
+                    
+                    <div class="max-w-3xl mx-auto md:mx-0 mb-12" id="hero-intro">
+                        <p class="text-base md:text-lg leading-relaxed text-gray-300">
+                            I bridge the gap between agricultural heritage and medical innovation. Specializing in sustainable biosensors, embedded systems, and precision instrumentation.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start" id="hero-buttons">
+                        <a href="#work" class="btn-primary px-8 py-3 bg-teal-400 text-dark-bg font-semibold rounded-lg">
+                            View Projects
+                        </a>
+                        <a href="#contact" class="btn-secondary px-8 py-3 border-2 border-gray-600 text-gray-300 font-semibold rounded-lg hover:border-teal-400">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section: The Mission -->
+    <section id="about" class="px-6 md:px-12 lg:px-24 bg-dark-card">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass-card rounded-xl p-8 md:p-12" id="about-card">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                    The Mission
+                </h2>
+                <p class="text-lg md:text-xl leading-relaxed text-gray-300">
+                    True medical innovation requires a balance of softness and rigor. I transform "waste"—such as agricultural surplus—into critical physiological interfaces. By fusing organic materials with low-power embedded architectures (like the Nordic nRF52840), I create wearable systems that are untethered, sustainable, and clinically precise. My work spans from flexible electrode fabrication to ISO 13485 regulatory compliance.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Selected Works: The Portfolio Grid -->
+    <section id="work" class="px-6 md:px-12 lg:px-24 bg-dark-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center" id="portfolio-title">
+                The Portfolio
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card glass-card rounded-xl p-6 md:p-8 scroll-animate">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Project 01</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                        Sustainable Bio-Interfaces
+                    </h3>
+                    <p class="text-sm text-earth-gold mb-4 font-medium">
+                        Pre-doctoral Research Associate, Lehigh University
+                    </p>
+                    <p class="text-base leading-relaxed text-gray-300 mb-6">
+                        Formulated novel gel-based bioelectrodes from agricultural surplus, replacing disposable synthetics. Fabricated flexible electrodes validated for high-fidelity physiological data acquisition.
+                    </p>
+                    <a href="project-sustainable-hydrogel.html" class="inline-flex items-center text-teal-400 hover:text-teal-300 text-sm font-medium">
+                        View Details
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Project Card 2 -->
+                <div class="project-card glass-card rounded-xl p-6 md:p-8 scroll-animate">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Project 02</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                        Untethered Sensing Ecosystems
+                    </h3>
+                    <p class="text-sm text-earth-gold mb-4 font-medium">
+                        Pre-doctoral Research Associate, Lehigh University
+                    </p>
+                    <p class="text-base leading-relaxed text-gray-300 mb-6">
+                        Designed a flexible PCB-based wearable platform using the MAX30003 AFE and LiPo circuitry. Programmed Nordic nRF52840 for low-noise BLE transmission and power management.
+                    </p>
+                    <a href="project-wearable-biosensing.html" class="inline-flex items-center text-teal-400 hover:text-teal-300 text-sm font-medium">
+                        View Details
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Project Card 3 -->
+                <div class="project-card glass-card rounded-xl p-6 md:p-8 scroll-animate">
+                    <div class="mb-4">
+                        <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Project 03</span>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                        Optical & Mechanical Precision
+                    </h3>
+                    <p class="text-sm text-earth-gold mb-4 font-medium">
+                        Research Assistant, JHU Hospital (Pathak Lab)
+                    </p>
+                    <p class="text-base leading-relaxed text-gray-300 mb-6">
+                        Led mechanical design of a next-gen optical microscope for in vivo imaging. Optimized fluorescence imaging configurations and developed MATLAB dashboards for filter selection.
+                    </p>
+                    <a href="project-optical-microscope.html" class="inline-flex items-center text-teal-400 hover:text-teal-300 text-sm font-medium">
+                        View Details
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technical Arsenal: Skills Section -->
+    <section id="skills" class="px-6 md:px-12 lg:px-24 bg-dark-card">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center" id="skills-title">
+                Technical Arsenal
+            </h2>
+            
+            <div class="space-y-10">
+                <!-- Hardware & Fabrication -->
+                <div class="scroll-animate">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                        <span class="w-1 h-8 bg-teal-400 mr-4"></span>
+                        Hardware & Fabrication
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            SolidWorks
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            Altium
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            PCB Design
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            3D Printing
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            Biomechanical Fixtures
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Firmware & Code -->
+                <div class="scroll-animate">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                        <span class="w-1 h-8 bg-teal-400 mr-4"></span>
+                        Firmware & Code
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            Python
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            MATLAB
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            C/C++
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            Embedded C
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            MCU Programming
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            Machine Learning
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Regulatory -->
+                <div class="scroll-animate">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                        <span class="w-1 h-8 bg-teal-400 mr-4"></span>
+                        Regulatory
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            ISO 13485
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            ISO 14971
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            Design of Experiments (DoE)
+                        </span>
+                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                            FDA Regulations
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer: Ready to Collaborate -->
+    <footer id="contact" class="px-6 md:px-12 lg:px-24 bg-dark-bg py-16 border-t border-zinc-800">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8" id="footer-title">
+                Ready to Collaborate
+            </h2>
+            
+            <div class="max-w-2xl mx-auto space-y-6" id="footer-content">
+                <p class="text-base md:text-lg text-gray-400">
+                    Currently working as a Pre-doctoral Research Associate at Lehigh University.
+                </p>
+                
+                <div class="pt-8 border-t border-zinc-800">
+                    <p class="text-sm md:text-base text-gray-300 space-y-2">
+                        <a href="#" class="text-teal-400 hover:text-teal-300 transition-colors">unnathiannapurna[at]gmail[dot]com</a><br>
+                        <span class="text-gray-400">Bethlehem, PA</span><br>
+                        <a href="https://www.linkedin.com/in/unnathishashikumar/" target="_blank" class="text-teal-400 hover:text-teal-300 transition-colors">LinkedIn</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-zinc-800">
+                <p class="text-sm text-gray-500">
+                    © 2026 Unnathi Annapurna Shashikumar. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Hero Animation Timeline (On Load)
+            const heroTimeline = gsap.timeline();
+            
+            // Set initial states for hero elements
+            gsap.set("#hero-headshot", { opacity: 0, y: 30 });
+            gsap.set("#hero-headline", { opacity: 0, y: 30 });
+            gsap.set("#hero-subheadline", { opacity: 0, y: 30 });
+            gsap.set("#hero-intro", { opacity: 0, y: 30 });
+            gsap.set("#hero-buttons", { opacity: 0, y: 30 });
+            
+            // Animate hero elements in staggered sequence
+            heroTimeline
+                .to("#hero-headshot", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                })
+                .to("#hero-headline", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                }, "-=0.7")
+                .to("#hero-subheadline", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                }, "-=0.7")
+                .to("#hero-intro", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                }, "-=0.7")
+                .to("#hero-buttons", {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out"
+                }, "-=0.7");
+            
+            // Scroll Animations for Project Cards and Skill Sections
+            gsap.utils.toArray(".scroll-animate").forEach((element) => {
+                gsap.from(element, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            // Animate About Card
+            gsap.from("#about-card", {
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#about-card",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const navHeight = document.querySelector('.sticky-nav').offsetHeight;
+                        const targetPosition = target.offsetTop - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close mobile menu when clicking a link
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+            
+            // Navbar background on scroll
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('.sticky-nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(18, 18, 18, 0.95)';
+                } else {
+                    nav.style.background = 'rgba(18, 18, 18, 0.9)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
