@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +25,8 @@
                     },
                     fontFamily: {
                         'sans': ['Inter', 'sans-serif'],
+                        'display': ['Space Grotesk', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
                     },
                 }
             }
@@ -47,13 +49,54 @@
             background-color: #121212;
             color: #E5E5E5;
             overflow-x: hidden;
+            /* Subtle Grid Pattern Background */
+            background-image: 
+                radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
         }
         
-        /* Glassmorphism effect */
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #14b8a6;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0d9488;
+        }
+        
+        /* Firefox Scrollbar */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #14b8a6 #1a1a1a;
+        }
+        
+        /* Glassmorphism effect - Enhanced */
         .glass-card {
-            background: rgba(30, 30, 30, 0.7);
+            background: rgba(30, 30, 30, 0.1);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Bioluminescent Card Hover Effect */
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.15), 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(45, 212, 191, 0.2);
         }
         
         /* Sticky navigation */
@@ -82,25 +125,16 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
         
-        /* Project card hover */
-        .project-card {
-            transition: all 0.4s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(94, 234, 212, 0.5);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        /* Pill tag */
+        /* Skill Pill - Upgraded */
         .pill-tag {
             transition: all 0.3s ease;
+            background-color: rgba(20, 184, 166, 0.1);
+            color: #5eead4;
+            border: none;
         }
         
         .pill-tag:hover {
-            background-color: rgba(94, 234, 212, 0.2);
-            border-color: rgba(94, 234, 212, 0.5);
+            background-color: rgba(20, 184, 166, 0.2);
             transform: scale(1.05);
         }
         
@@ -142,6 +176,76 @@
             border: 2px solid rgba(20, 184, 166, 0.3);
             box-shadow: 0 0 30px rgba(20, 184, 166, 0.2);
             overflow: hidden;
+            position: relative;
+        }
+        
+        /* Glow Orb behind Hero Headshot */
+        #hero-headshot::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+        
+        @media (min-width: 768px) {
+            #hero-headshot::before {
+                width: 400px;
+                height: 400px;
+            }
+        }
+        
+        /* Metrics Band */
+        .metrics-band {
+            background: rgba(39, 39, 42, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* Publication Card */
+        .publication-card {
+            transition: all 0.3s ease;
+            border-left: 3px solid #14b8a6;
+        }
+        
+        .publication-card:hover {
+            transform: translateX(8px);
+            border-left-color: #5eead4;
+        }
+        
+        /* Timeline Styles - Flowbite Style */
+        /* Timeline item opacity is controlled by GSAP animation */
+        
+        /* Download Resume Button */
+        .btn-resume {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-resume:hover {
+            background-color: #14b8a6;
+            color: #121212;
+        }
+        
+        /* Email Copy Interaction */
+        .email-copy {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .email-copy:hover {
+            color: #5eead4;
+        }
+        
+        .email-copy.copied {
+            color: #14b8a6;
         }
     </style>
 </head>
@@ -152,11 +256,17 @@
             <div class="text-xl font-semibold text-teal-400">
                 UAS
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="nav-link text-sm text-gray-300 hover:text-teal-400">About</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#experience" class="nav-link text-sm text-gray-300 hover:text-teal-400">Experience</a>
                 <a href="#work" class="nav-link text-sm text-gray-300 hover:text-teal-400">Work</a>
                 <a href="#skills" class="nav-link text-sm text-gray-300 hover:text-teal-400">Skills</a>
                 <a href="#contact" class="nav-link text-sm text-gray-300 hover:text-teal-400">Contact</a>
+                <a href="assets/resume.pdf" download class="btn-resume px-4 py-2 border-2 border-teal-400 text-teal-400 text-sm font-semibold rounded-lg flex items-center gap-2 hover:bg-teal-400 hover:text-dark-bg">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
+                    Download Resume
+                </a>
             </div>
             <!-- Mobile menu button -->
             <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-teal-400">
@@ -167,10 +277,16 @@
         </div>
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 space-y-3">
-            <a href="#about" class="block text-sm text-gray-300 hover:text-teal-400">About</a>
+            <a href="#experience" class="block text-sm text-gray-300 hover:text-teal-400">Experience</a>
             <a href="#work" class="block text-sm text-gray-300 hover:text-teal-400">Work</a>
             <a href="#skills" class="block text-sm text-gray-300 hover:text-teal-400">Skills</a>
             <a href="#contact" class="block text-sm text-gray-300 hover:text-teal-400">Contact</a>
+            <a href="assets/resume.pdf" download class="btn-resume inline-flex items-center gap-2 px-4 py-2 border-2 border-teal-400 text-teal-400 text-sm font-semibold rounded-lg mt-4 hover:bg-teal-400 hover:text-dark-bg">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Download Resume
+            </a>
         </div>
     </nav>
     
@@ -179,8 +295,8 @@
         <div class="max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
                 <!-- Headshot -->
-                <div class="flex-shrink-0" id="hero-headshot">
-                    <div class="headshot-container w-48 h-48 md:w-64 md:h-64">
+                <div class="flex-shrink-0 relative" id="hero-headshot">
+                    <div class="headshot-container w-48 h-48 md:w-64 md:h-64 relative z-10">
                         <img src="UAS_PP.jpeg" 
                              alt="Unnathi Annapurna Shashikumar" 
                              class="w-full h-full object-cover">
@@ -189,11 +305,11 @@
                 
                 <!-- Hero Content -->
                 <div class="flex-1 text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" id="hero-headline">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-display" id="hero-headline">
                         Biomedical Engineer: Innovating at the Intersection of <span class="text-teal-400">Wearables, Robotics & Sustainable Health</span>.
                     </h1>
                     
-                    <p class="text-lg md:text-xl text-gray-400 mb-8" id="hero-subheadline">
+                    <p class="text-lg md:text-xl text-gray-400 mb-8 font-mono" id="hero-subheadline">
                         Unnathi Annapurna Shashikumar | Biomedical Engineer | MSE, Johns Hopkins University
                     </p>
                     
@@ -216,24 +332,125 @@
         </div>
     </section>
     
-    <!-- About Section: The Mission -->
-    <section id="about" class="px-6 md:px-12 lg:px-24 bg-dark-card">
-        <div class="max-w-5xl mx-auto">
-            <div class="glass-card rounded-xl p-8 md:p-12" id="about-card">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-                    The Mission
-                </h2>
-                <p class="text-lg md:text-xl leading-relaxed text-gray-300">
-                    True medical innovation requires a balance of softness and rigor. I transform "waste"—such as agricultural surplus—into critical physiological interfaces. By fusing organic materials with low-power embedded architectures (like the Nordic nRF52840), I create wearable systems that are untethered, sustainable, and clinically precise. My work spans from flexible electrode fabrication to ISO 13485 regulatory compliance.
-                </p>
+    <!-- Metrics Band -->
+    <section id="metrics" class="metrics-band py-12 border-y border-zinc-800/50">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <div class="text-center scroll-animate-metric">
+                    <div class="text-5xl md:text-6xl font-bold text-teal-400 mb-2 font-display" id="metric-1">
+                        0%
+                    </div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider font-mono">
+                        Faster Prototyping
+                    </div>
+                </div>
+                <div class="text-center scroll-animate-metric">
+                    <div class="text-5xl md:text-6xl font-bold text-teal-400 mb-2 font-display" id="metric-2">
+                        0%
+                    </div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider font-mono">
+                        Testing Efficiency
+                    </div>
+                </div>
+                <div class="text-center scroll-animate-metric">
+                    <div class="text-5xl md:text-6xl font-bold text-teal-400 mb-2 font-display" id="metric-3">
+                        0.0/4.0
+                    </div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider font-mono">
+                        MSE GPA
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
+    
+    <!-- About Section: Experience Timeline -->
+    <section id="experience" class="px-6 md:px-12 lg:px-24 bg-dark-card py-16 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-16 text-center font-display" id="timeline-title">
+                Career Path
+            </h2>
+            
+            <ol class="relative border-l border-teal-500/30 ml-4">
+                <!-- Timeline Item 1 -->
+                <li class="timeline-item mb-10 ml-6">
+                    <span class="absolute flex items-center justify-center w-4 h-4 bg-teal-400 rounded-full -left-2 ring-4 ring-zinc-900"></span>
+                    <div class="p-4 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg backdrop-blur-sm">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                            <h3 class="text-lg font-semibold text-zinc-100 font-display">
+                                Pre-doctoral Research Associate
+                            </h3>
+                            <time class="text-sm font-mono text-teal-300 mt-1 md:mt-0">
+                                Aug 2025 - Present
+                            </time>
+                        </div>
+                        <p class="text-base text-zinc-400 font-mono">
+                            Lehigh University
+                        </p>
+                    </div>
+                </li>
+                
+                <!-- Timeline Item 2 -->
+                <li class="timeline-item mb-10 ml-6">
+                    <span class="absolute flex items-center justify-center w-4 h-4 bg-teal-400 rounded-full -left-2 ring-4 ring-zinc-900"></span>
+                    <div class="p-4 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg backdrop-blur-sm">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                            <h3 class="text-lg font-semibold text-zinc-100 font-display">
+                                Biomechanical Engineer
+                            </h3>
+                            <time class="text-sm font-mono text-teal-300 mt-1 md:mt-0">
+                                Jan 2025 - May 2025
+                            </time>
+                        </div>
+                        <p class="text-base text-zinc-400 font-mono">
+                            NanoBioFab
+                        </p>
+                    </div>
+                </li>
+                
+                <!-- Timeline Item 3 -->
+                <li class="timeline-item mb-10 ml-6">
+                    <span class="absolute flex items-center justify-center w-4 h-4 bg-teal-400 rounded-full -left-2 ring-4 ring-zinc-900"></span>
+                    <div class="p-4 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg backdrop-blur-sm">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                            <h3 class="text-lg font-semibold text-zinc-100 font-display">
+                                Research Assistant
+                            </h3>
+                            <time class="text-sm font-mono text-teal-300 mt-1 md:mt-0">
+                                Jun 2024 - Jun 2025
+                            </time>
+                        </div>
+                        <p class="text-base text-zinc-400 font-mono">
+                            Johns Hopkins Pathak Lab
+                        </p>
+                    </div>
+                </li>
+                
+                <!-- Timeline Item 4 -->
+                <li class="timeline-item mb-10 ml-6">
+                    <span class="absolute flex items-center justify-center w-4 h-4 bg-teal-400 rounded-full -left-2 ring-4 ring-zinc-900"></span>
+                    <div class="p-4 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg backdrop-blur-sm">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                            <h3 class="text-lg font-semibold text-zinc-100 font-display">
+                                Electronics Testing Intern
+                            </h3>
+                            <time class="text-sm font-mono text-teal-300 mt-1 md:mt-0">
+                                Sept 2022 - Mar 2023
+                            </time>
+                        </div>
+                        <p class="text-base text-zinc-400 font-mono">
+                            InnAccel Pvt. Ltd
+                        </p>
+                    </div>
+                </li>
+            </ol>
         </div>
     </section>
     
     <!-- Selected Works: The Portfolio Grid -->
     <section id="work" class="px-6 md:px-12 lg:px-24 bg-dark-bg">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center" id="portfolio-title">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-display" id="portfolio-title">
                 The Portfolio
             </h2>
             
@@ -243,10 +460,10 @@
                     <div class="mb-4">
                         <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Project 01</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 font-display">
                         Sustainable Bio-Interfaces
                     </h3>
-                    <p class="text-sm text-earth-gold mb-4 font-medium">
+                    <p class="text-sm text-earth-gold mb-4 font-medium font-mono">
                         Pre-doctoral Research Associate, Lehigh University
                     </p>
                     <p class="text-base leading-relaxed text-gray-300 mb-6">
@@ -265,10 +482,10 @@
                     <div class="mb-4">
                         <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Project 02</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 font-display">
                         Untethered Sensing Ecosystems
                     </h3>
-                    <p class="text-sm text-earth-gold mb-4 font-medium">
+                    <p class="text-sm text-earth-gold mb-4 font-medium font-mono">
                         Pre-doctoral Research Associate, Lehigh University
                     </p>
                     <p class="text-base leading-relaxed text-gray-300 mb-6">
@@ -287,10 +504,10 @@
                     <div class="mb-4">
                         <span class="text-xs font-semibold text-teal-400 uppercase tracking-wider">Project 03</span>
                     </div>
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 font-display">
                         Optical & Mechanical Precision
                     </h3>
-                    <p class="text-sm text-earth-gold mb-4 font-medium">
+                    <p class="text-sm text-earth-gold mb-4 font-medium font-mono">
                         Research Assistant, JHU Hospital (Pathak Lab)
                     </p>
                     <p class="text-base leading-relaxed text-gray-300 mb-6">
@@ -307,88 +524,123 @@
         </div>
     </section>
     
+    <!-- Publications Section: Research & Dissemination -->
+    <section id="publications" class="px-6 md:px-12 lg:px-24 bg-dark-card">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-display" id="publications-title">
+                Research & Dissemination
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- Publication 1 -->
+                <div class="publication-card glass-card rounded-lg p-6 md:p-8 scroll-animate">
+                    <p class="text-base md:text-lg leading-relaxed text-gray-300">
+                        "Engineering sustainable low-cost hydrogel electrodes..." <span class="text-teal-400 font-mono">IEEE EMBC</span>
+                    </p>
+                </div>
+                
+                <!-- Publication 2 -->
+                <div class="publication-card glass-card rounded-lg p-6 md:p-8 scroll-animate">
+                    <p class="text-base md:text-lg leading-relaxed text-gray-300">
+                        "Non-invasive thoracic bioimpedance system..." <span class="text-teal-400 font-mono">IEEE Body Sensor Networks</span>
+                    </p>
+                </div>
+                
+                <!-- Publication 3 -->
+                <div class="publication-card glass-card rounded-lg p-6 md:p-8 scroll-animate">
+                    <p class="text-base md:text-lg leading-relaxed text-gray-300">
+                        "Developing an affordable hydrogel-based ECG electrode..." <span class="text-teal-400 font-mono">BMES</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Technical Arsenal: Skills Section -->
     <section id="skills" class="px-6 md:px-12 lg:px-24 bg-dark-card">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center" id="skills-title">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-12 text-center font-display" id="skills-title">
                 Technical Arsenal
             </h2>
             
             <div class="space-y-10">
                 <!-- Hardware & Fabrication -->
                 <div class="scroll-animate">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center font-display">
                         <span class="w-1 h-8 bg-teal-400 mr-4"></span>
                         Hardware & Fabrication
                     </h3>
                     <div class="flex flex-wrap gap-3">
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             SolidWorks
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             Altium
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             PCB Design
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             3D Printing
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             Biomechanical Fixtures
+                        </span>
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
+                            Design of Experiments (DoE)
                         </span>
                     </div>
                 </div>
                 
                 <!-- Firmware & Code -->
                 <div class="scroll-animate">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center font-display">
                         <span class="w-1 h-8 bg-teal-400 mr-4"></span>
                         Firmware & Code
                     </h3>
                     <div class="flex flex-wrap gap-3">
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             Python
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             MATLAB
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             C/C++
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             Embedded C
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             MCU Programming
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             Machine Learning
                         </span>
                     </div>
                 </div>
                 
                 <!-- Regulatory -->
-                <div class="scroll-animate">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center">
+                <!-- <div class="scroll-animate">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-6 flex items-center font-display">
                         <span class="w-1 h-8 bg-teal-400 mr-4"></span>
                         Regulatory
                     </h3>
                     <div class="flex flex-wrap gap-3">
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             ISO 13485
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             ISO 14971
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             Design of Experiments (DoE)
                         </span>
-                        <span class="pill-tag px-5 py-2 bg-zinc-800 border border-zinc-700 text-gray-300 rounded-full text-sm font-medium">
+                        <span class="pill-tag px-5 py-2 rounded-full text-sm font-medium font-mono">
                             FDA Regulations
                         </span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -396,7 +648,7 @@
     <!-- Footer: Ready to Collaborate -->
     <footer id="contact" class="px-6 md:px-12 lg:px-24 bg-dark-bg py-16 border-t border-zinc-800">
         <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8" id="footer-title">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 font-display" id="footer-title">
                 Ready to Collaborate
             </h2>
             
@@ -406,11 +658,19 @@
                 </p>
                 
                 <div class="pt-8 border-t border-zinc-800">
-                    <p class="text-sm md:text-base text-gray-300 space-y-2">
-                        <a href="#" class="text-teal-400 hover:text-teal-300 transition-colors">unnathiannapurna[at]gmail[dot]com</a><br>
-                        <span class="text-gray-400">Bethlehem, PA</span><br>
-                        <a href="https://www.linkedin.com/in/unnathishashikumar/" target="_blank" class="text-teal-400 hover:text-teal-300 transition-colors">LinkedIn</a>
-                    </p>
+                    <div class="flex flex-col items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <span id="email-copy" class="email-copy text-sm md:text-base text-teal-400 font-mono">
+                                unnathiannapurna@gmail.com
+                            </span>
+                            <a href="https://www.linkedin.com/in/unnathishashikumar/" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:text-teal-300 transition-colors" aria-label="LinkedIn Profile">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                        </div>
+                        <span class="text-gray-400 text-sm">Bethlehem, PA</span>
+                    </div>
                 </div>
             </div>
             
@@ -491,14 +751,93 @@
                 });
             });
             
-            // Animate About Card
-            gsap.from("#about-card", {
+            // Timeline Animation
+            // Animate Timeline Title
+            gsap.from("#timeline-title", {
                 opacity: 0,
-                y: 50,
+                y: 30,
                 duration: 0.8,
                 ease: "power2.out",
                 scrollTrigger: {
-                    trigger: "#about-card",
+                    trigger: "#timeline-title",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            // Animate Timeline Items
+            // Set initial state
+            gsap.set(".timeline-item", { opacity: 0, x: -20 });
+            
+            // Animate on scroll
+            gsap.to(".timeline-item", {
+                scrollTrigger: {
+                    trigger: "#experience",
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            });
+            
+            // Counter Animation for Metrics Band
+            function animateCounter(element, targetValue, suffix = '') {
+                const obj = { value: 0 };
+                const isGPA = suffix.includes('/');
+                
+                ScrollTrigger.create({
+                    trigger: element,
+                    start: "top 80%",
+                    onEnter: () => {
+                        gsap.to(obj, {
+                            value: targetValue,
+                            duration: 2,
+                            ease: "power2.out",
+                            onUpdate: () => {
+                                if (isGPA) {
+                                    // Handle GPA format (3.6/4.0)
+                                    const gpaValue = (obj.value / 100 * 3.6).toFixed(1);
+                                    element.textContent = `${gpaValue}/4.0`;
+                                } else {
+                                    element.textContent = Math.round(obj.value) + suffix;
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Initialize counter animations
+            animateCounter(document.getElementById("metric-1"), 40, "%");
+            animateCounter(document.getElementById("metric-2"), 35, "%");
+            animateCounter(document.getElementById("metric-3"), 100, "/4.0"); // 100% = 3.6/4.0
+            
+            // Animate Metrics Band items
+            gsap.utils.toArray(".scroll-animate-metric").forEach((element) => {
+                gsap.from(element, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+            
+            // Animate Publications Title
+            gsap.from("#publications-title", {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#publications-title",
                     start: "top 80%",
                     toggleActions: "play none none none"
                 }
@@ -546,6 +885,51 @@
                     nav.style.background = 'rgba(18, 18, 18, 0.9)';
                 }
             });
+            
+            // Email Copy to Clipboard Functionality
+            const emailCopy = document.getElementById('email-copy');
+            const originalEmail = 'unnathiannapurna@gmail.com';
+            
+            if (emailCopy) {
+                emailCopy.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(originalEmail);
+                        
+                        // Change text to "Copied to Clipboard!"
+                        emailCopy.textContent = 'Copied to Clipboard!';
+                        emailCopy.classList.add('copied');
+                        
+                        // Revert after 2 seconds
+                        setTimeout(() => {
+                            emailCopy.textContent = originalEmail;
+                            emailCopy.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = originalEmail;
+                        textArea.style.position = 'fixed';
+                        textArea.style.opacity = '0';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        
+                        try {
+                            document.execCommand('copy');
+                            emailCopy.textContent = 'Copied to Clipboard!';
+                            emailCopy.classList.add('copied');
+                            
+                            setTimeout(() => {
+                                emailCopy.textContent = originalEmail;
+                                emailCopy.classList.remove('copied');
+                            }, 2000);
+                        } catch (err) {
+                            console.error('Failed to copy email:', err);
+                        }
+                        
+                        document.body.removeChild(textArea);
+                    }
+                });
+            }
         });
     </script>
 </body>
